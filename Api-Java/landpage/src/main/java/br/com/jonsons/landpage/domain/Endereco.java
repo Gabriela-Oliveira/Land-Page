@@ -1,15 +1,30 @@
 package br.com.jonsons.landpage.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.sun.istack.NotNull;
+
+@Entity
+@Table(name="Enderecos")
 public class Endereco {
+	@Id
 	private Integer codigo;
+	@NotNull
 	private String cep;
+	@NotNull
 	private String rua;
+	@NotNull
 	private String bairro;
+	@NotNull
 	private Integer numero;
+	@NotNull
 	private String cidade;
+	@NotNull
 	private String estado;
-	
-	public Endereco() {}
+
+	public Endereco() {};
 	
 	public Endereco(Integer codigo, String cep, String rua, String bairro, Integer numero, String cidade,
 			String estado) {

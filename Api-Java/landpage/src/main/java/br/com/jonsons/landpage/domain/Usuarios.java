@@ -1,14 +1,21 @@
 package br.com.jonsons.landpage.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import com.sun.istack.NotNull;
 
 @Entity
+@Table(name="Usuarios")
 public class Usuarios {
+	@Id
 	private Integer codigo;
+	@NotNull
 	private String nome;
+	@NotNull
 	private String whatsapp;
 	
-	public Usuarios() {}
+	public Usuarios() {};
 	
 	public Usuarios(Integer codigo, String nome, String whatsapp) {
 		super();

@@ -1,18 +1,32 @@
 package br.com.jonsons.landpage.domain;
 
 import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
+
+@Entity
+@Table(name="Funcionarios")
 public class Funcionario {
+	@Id
 	private Integer codigo;
+	@NotNull
 	private String nome;
+	@NotNull
 	private String cpf;
+	@NotNull
 	private String email;
+	@NotNull
 	private String senha;
+	@NotNull
 	private LocalDate dataNascimento;
+	@NotNull
 	private Double salario;
 	private Endereco endereco;
 	
-	public Funcionario() {}
+	public Funcionario() {};
 	
 	public Funcionario(Integer codigo, String nome, String cpf, String email, String senha, LocalDate dataNascimento,
 			Double salario, Endereco endereco) {
