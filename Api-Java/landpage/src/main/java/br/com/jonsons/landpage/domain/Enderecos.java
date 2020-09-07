@@ -1,32 +1,33 @@
 package br.com.jonsons.landpage.domain;
 
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.sun.istack.NotNull;
-
 @Entity
-@Table(name="Enderecos")
-public class Endereco {
+
+public class Enderecos {
 	@Id
-	private Integer codigo;
-	@NotNull
+	@GeneratedValue
+	private Long codigo;
+//	@NotNull
 	private String cep;
-	@NotNull
+//	@NotNull
 	private String rua;
-	@NotNull
+//	@NotNull
 	private String bairro;
-	@NotNull
-	private Integer numero;
-	@NotNull
+//	@NotNull
+	private Long numero;
+//	@NotNull
 	private String cidade;
-	@NotNull
+//	@NotNull
 	private String estado;
 
-	public Endereco() {};
+	public Enderecos() {};
 	
-	public Endereco(Integer codigo, String cep, String rua, String bairro, Integer numero, String cidade,
+	public Enderecos(Long codigo, String cep, String rua, String bairro, Long numero, String cidade,
 			String estado) {
 		super();
 		this.codigo = codigo;
@@ -38,11 +39,11 @@ public class Endereco {
 		this.estado = estado;
 	}
 
-	public Integer getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Integer codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -70,11 +71,11 @@ public class Endereco {
 		this.bairro = bairro;
 	}
 
-	public Integer getNumero() {
+	public Long getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(Long numero) {
 		this.numero = numero;
 	}
 
@@ -94,10 +95,10 @@ public class Endereco {
 		this.estado = estado;
 	}
 
-	@Override
-	public String toString() {
-		return "Endereco [codigo=" + codigo + ", cep=" + cep + ", rua=" + rua + ", bairro=" + bairro + ", numero="
-				+ numero + ", cidade=" + cidade + ", estado=" + estado + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Endereco [codigo=" + codigo + ", cep=" + cep + ", rua=" + rua + ", bairro=" + bairro + ", numero="
+//				+ numero + ", cidade=" + cidade + ", estado=" + estado + "]";
+//	}
 	
 }

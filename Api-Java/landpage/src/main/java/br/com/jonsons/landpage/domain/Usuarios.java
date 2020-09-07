@@ -1,34 +1,36 @@
 package br.com.jonsons.landpage.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name="Usuarios")
+
 public class Usuarios {
 	@Id
-	private Integer codigo;
-	@NotNull
+	@GeneratedValue
+	private Long codigo;
+//	@NotNull
 	private String nome;
-	@NotNull
+//	@NotNull
 	private String whatsapp;
 	
 	public Usuarios() {};
 	
-	public Usuarios(Integer codigo, String nome, String whatsapp) {
+	public Usuarios(Long codigo, String nome, String whatsapp) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
 		this.whatsapp = whatsapp;
 	}
 
-	public Integer getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Integer codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -48,9 +50,9 @@ public class Usuarios {
 		this.whatsapp = whatsapp;
 	}
 
-	@Override
-	public String toString() {
-		return "Usuarios [codigo=" + codigo + ", nome=" + nome + ", whatsapp=" + whatsapp + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Usuarios [codigo=" + codigo + ", nome=" + nome + ", whatsapp=" + whatsapp + "]";
+//	}
 	
 }	

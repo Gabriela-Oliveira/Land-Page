@@ -2,34 +2,36 @@ package br.com.jonsons.landpage.domain;
 
 import java.time.LocalDate;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name="Funcionarios")
-public class Funcionario {
+
+public class Funcionarios {
 	@Id
-	private Integer codigo;
-	@NotNull
+	@GeneratedValue
+	private Long codigo;
+//	@NotNull
 	private String nome;
-	@NotNull
+//	@NotNull
 	private String cpf;
-	@NotNull
+//	@NotNull
 	private String email;
-	@NotNull
+//	@NotNull
 	private String senha;
-	@NotNull
+//	@NotNull
 	private LocalDate dataNascimento;
-	@NotNull
+//	@NotNull
 	private Double salario;
-	private Endereco endereco;
+	private Long endereco;
 	
-	public Funcionario() {};
+	public Funcionarios() {};
 	
-	public Funcionario(Integer codigo, String nome, String cpf, String email, String senha, LocalDate dataNascimento,
-			Double salario, Endereco endereco) {
+	public Funcionarios(Long codigo, String nome, String cpf, String email, String senha, LocalDate dataNascimento,
+			Double salario, Long endereco) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
@@ -41,11 +43,11 @@ public class Funcionario {
 		this.endereco = endereco;
 	}
 
-	public Integer getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Integer codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -97,20 +99,20 @@ public class Funcionario {
 		this.salario = salario;
 	}
 
-	public Endereco getEndereco() {
+	public Long getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(Endereco endereco) {
+	public void setEndereco(Long endereco) {
 		this.endereco = endereco;
 	}
 
-	@Override
-	public String toString() {
-		return "Funcionario [codigo=" + codigo + ", nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", senha="
-				+ senha + ", dataNascimento=" + dataNascimento + ", salario=" + salario + ", endereco=" + endereco
-				+ "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Funcionario [codigo=" + codigo + ", nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", senha="
+//				+ senha + ", dataNascimento=" + dataNascimento + ", salario=" + salario + ", endereco=" + endereco
+//				+ "]";
+//	}
 	
 	
 	
