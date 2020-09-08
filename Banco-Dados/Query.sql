@@ -24,7 +24,7 @@ add column cpf char (11) unique not null,
 add column email VarChar(100) not null,
 add column senha VarChar(10) not null,
 add column dataNascimento date not null,
-add column salario money not null,
+add column salario float not null,
 add column endereco Integer REFERENCES enderecos (codigo);
 
 insert into usuarios (nome, whatsapp)
