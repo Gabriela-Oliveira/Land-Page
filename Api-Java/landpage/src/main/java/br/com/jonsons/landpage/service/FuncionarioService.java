@@ -40,8 +40,8 @@ public class FuncionarioService {
 			 fun.setCpf(funcionario.getCpf());
 		 }
 		 
-		 if(funcionario.getDataNascimento() != null) {
-			 fun.setDataNascimento(funcionario.getDataNascimento());
+		 if(funcionario.getDatanascimento() != null) {
+			 fun.setDatanascimento(funcionario.getDatanascimento());
 		 }	 
 		 
 		 if(funcionario.getEmail() != null) {

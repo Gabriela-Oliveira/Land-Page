@@ -23,14 +23,14 @@ public class Funcionarios {
 //	@NotNull
 	private String senha;
 //	@NotNull
-	private LocalDate dataNascimento;
+	private LocalDate datanascimento;
 //	@NotNull
 	private Double salario;
 	private Long endereco;
 	
 	public Funcionarios() {};
 	
-	public Funcionarios(Long codigo, String nome, String cpf, String email, String senha, LocalDate dataNascimento,
+	public Funcionarios(Long codigo, String nome, String cpf, String email, String senha, LocalDate datanascimento,
 			Double salario, Long endereco) {
 		super();
 		this.codigo = codigo;
@@ -38,7 +38,7 @@ public class Funcionarios {
 		this.cpf = cpf;
 		this.email = email;
 		this.senha = senha;
-		this.dataNascimento = dataNascimento;
+		this.datanascimento = datanascimento;
 		this.salario = salario;
 		this.endereco = endereco;
 	}
@@ -83,12 +83,12 @@ public class Funcionarios {
 		this.senha = senha;
 	}
 
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
+	public LocalDate getDatanascimento() {
+		return datanascimento;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setDatanascimento(LocalDate datanascimento) {
+		this.datanascimento = datanascimento;
 	}
 
 	public Double getSalario() {
@@ -110,7 +110,7 @@ public class Funcionarios {
 //	@Override
 //	public String toString() {
 //		return "Funcionario [codigo=" + codigo + ", nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", senha="
-//				+ senha + ", dataNascimento=" + dataNascimento + ", salario=" + salario + ", endereco=" + endereco
+//				+ senha + ", datanascimento=" + datanascimento + ", salario=" + salario + ", endereco=" + endereco
 //				+ "]";
 //	}
 	
