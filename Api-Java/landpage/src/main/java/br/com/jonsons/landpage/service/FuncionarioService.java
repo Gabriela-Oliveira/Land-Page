@@ -37,8 +37,8 @@ public class FuncionarioService {
 			}
 		}
 		
-		if(funcionario.getSalario() < 1045) {
-			throw new SalarioInvalidoException();
+		if(funcionario.getSalario() < 1045.00) {
+			throw new SalarioInvalidoException(funcionario.getSalario());
 		}
 		return funcionarioRepositorio.save(funcionario);
 	}
