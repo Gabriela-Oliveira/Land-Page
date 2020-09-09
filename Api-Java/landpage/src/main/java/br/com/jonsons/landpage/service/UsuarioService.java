@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.jonsons.landpage.domain.Usuarios;
+import br.com.jonsons.landpage.exceptions.UsuarioNotFoundException;
 import br.com.jonsons.landpage.repository.UsuarioRepository;
-
 
 @Service
 public class UsuarioService {
@@ -19,10 +19,10 @@ public class UsuarioService {
 		return usuarioRepository.findAll();
 	}
 	
-	public Optional<Usuarios> getById(Long codigo) {
+	public Optional<Usuarios> getById(Long codigo) throws UsuarioNotFoundException {
 		Optional<Usuarios> usuario = usuarioRepository.findById(codigo);
 		if(!usuario.isPresent()) {
-			return null;
+			throw new UsuarioNotFoundException();
 		}
 		return usuario;
 	}
@@ -31,10 +31,10 @@ public class UsuarioService {
 		return usuarioRepository.save(usuario);
 	}
 	
-	public Usuarios update(Long codigo, Usuarios usuario) {
+	public Usuarios update(Long codigo, Usuarios usuario) throws UsuarioNotFoundException {
 		 Optional<Usuarios> usuarioAtualizado = usuarioRepository.findById(codigo);
 		 if(!usuarioAtualizado.isPresent()) {
-			 return null;
+			 throw new UsuarioNotFoundException();
 		 }
 		 
 		 Usuarios user = usuarioAtualizado.get();
@@ -50,8 +50,11 @@ public class UsuarioService {
 		 return user;
 		}
 	
-		public void delete(Long codigo) {
+		public void delete(Long codigo) throws UsuarioNotFoundException {
 			Optional<Usuarios> usuario = usuarioRepository.findById(codigo);
+			if(!usuario.isPresent()) {
+				throw new UsuarioNotFoundException();
+			} 
 			usuarioRepository.delete(usuario.get());
 		}
 }

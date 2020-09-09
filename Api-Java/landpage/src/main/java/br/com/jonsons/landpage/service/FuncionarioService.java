@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.jonsons.landpage.domain.Funcionarios;
+import br.com.jonsons.landpage.exceptions.CpfRepetidoException;
+import br.com.jonsons.landpage.exceptions.FuncionarioNotFoundException;
+import br.com.jonsons.landpage.exceptions.SalarioInvalidoException;
 import br.com.jonsons.landpage.repository.FuncionarioRepositorio;
 
 @Service
@@ -18,22 +21,32 @@ public class FuncionarioService {
 		return funcionarioRepositorio.findAll();
 	}
 	
-	public Optional<Funcionarios> getById(Long codigo) {
+	public Optional<Funcionarios> getById(Long codigo) throws FuncionarioNotFoundException {
 		Optional<Funcionarios> funcionario = funcionarioRepositorio.findById(codigo);
 		if(!funcionario.isPresent()) {
-			return null;
+			throw new FuncionarioNotFoundException();
 		}
 		return funcionario;
 	}
 	
-	public Funcionarios post(Funcionarios funcionario) {
+	public Funcionarios post(Funcionarios funcionario) throws CpfRepetidoException, SalarioInvalidoException {
+		List<Funcionarios> listaFunc = funcionarioRepositorio.findAll();
+		for (Funcionarios func : listaFunc) {
+			if(funcionario.getCpf().equals(func.getCpf())) {
+				throw new CpfRepetidoException();
+			}
+		}
+		
+		if(funcionario.getSalario() < 1045) {
+			throw new SalarioInvalidoException();
+		}
 		return funcionarioRepositorio.save(funcionario);
 	}
 	
-	public Funcionarios update(Long codigo, Funcionarios funcionario) {
+	public Funcionarios update(Long codigo, Funcionarios funcionario) throws FuncionarioNotFoundException {
 		 Optional<Funcionarios> funcionarioAtualizado = funcionarioRepositorio.findById(codigo);
 		 if(!funcionarioAtualizado.isPresent()) {
-			 return null;
+			 throw new FuncionarioNotFoundException();
 		 }
 		 Funcionarios fun = funcionarioAtualizado.get();
 		 if(funcionario.getCpf() != null) {
@@ -67,8 +80,11 @@ public class FuncionarioService {
 		 return fun;
 		}
 	
-		public void delete(Long codigo) {
+		public void delete(Long codigo) throws FuncionarioNotFoundException {
 			Optional<Funcionarios> funcionario = funcionarioRepositorio.findById(codigo);
+			if(!funcionario.isPresent()) {
+				throw new FuncionarioNotFoundException();
+			}
 			funcionarioRepositorio.delete(funcionario.get());
 		}
 }
