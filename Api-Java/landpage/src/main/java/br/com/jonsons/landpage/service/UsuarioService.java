@@ -22,7 +22,7 @@ public class UsuarioService {
 	public Optional<Usuarios> getById(Long codigo) throws UsuarioNotFoundException {
 		Optional<Usuarios> usuario = usuarioRepository.findById(codigo);
 		if(!usuario.isPresent()) {
-			throw new UsuarioNotFoundException();
+			throw new UsuarioNotFoundException(codigo);
 		}
 		return usuario;
 	}
@@ -34,7 +34,7 @@ public class UsuarioService {
 	public Usuarios update(Long codigo, Usuarios usuario) throws UsuarioNotFoundException {
 		 Optional<Usuarios> usuarioAtualizado = usuarioRepository.findById(codigo);
 		 if(!usuarioAtualizado.isPresent()) {
-			 throw new UsuarioNotFoundException();
+			 throw new UsuarioNotFoundException(codigo);
 		 }
 		 
 		 Usuarios user = usuarioAtualizado.get();
@@ -53,7 +53,7 @@ public class UsuarioService {
 		public void delete(Long codigo) throws UsuarioNotFoundException {
 			Optional<Usuarios> usuario = usuarioRepository.findById(codigo);
 			if(!usuario.isPresent()) {
-				throw new UsuarioNotFoundException();
+				throw new UsuarioNotFoundException(codigo);
 			} 
 			usuarioRepository.delete(usuario.get());
 		}

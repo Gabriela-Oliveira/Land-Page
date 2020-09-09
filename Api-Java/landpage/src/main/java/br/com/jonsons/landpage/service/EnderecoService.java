@@ -22,7 +22,7 @@ public class EnderecoService {
 	public Optional<Enderecos> getById(Long codigo) throws EnderecoNotFoundException {
 		Optional<Enderecos> endereco = enderecoRepository.findById(codigo);
 		if(!endereco.isPresent()) {
-			throw new EnderecoNotFoundException();
+			throw new EnderecoNotFoundException(codigo);
 		}
 		return endereco;
 	}
@@ -34,7 +34,7 @@ public class EnderecoService {
 	public Enderecos update(Long codigo, Enderecos endereco) throws EnderecoNotFoundException {
 		 Optional<Enderecos> enderecoAtualizado = enderecoRepository.findById(codigo);
 		 if(!enderecoAtualizado.isPresent()) {
-			 throw new EnderecoNotFoundException();
+			 throw new EnderecoNotFoundException(codigo);
 		 }
 		 
 		 Enderecos end = enderecoAtualizado.get();
@@ -69,7 +69,7 @@ public class EnderecoService {
 		public void delete(Long codigo) throws EnderecoNotFoundException {
 			Optional<Enderecos> endereco = enderecoRepository.findById(codigo);
 			if(!endereco.isPresent()) {
-				throw new EnderecoNotFoundException();
+				throw new EnderecoNotFoundException(codigo);
 			}
 			enderecoRepository.delete(endereco.get());
 		}

@@ -6,6 +6,10 @@ public class EnderecoNotFoundException extends Exception {
 	private Long codigo;
 	
 	public EnderecoNotFoundException() {}
+	
+	public EnderecoNotFoundException(Long codigo) {
+		this.codigo = codigo;
+	}
 
 	public Long getCodigo() {
 		return codigo;

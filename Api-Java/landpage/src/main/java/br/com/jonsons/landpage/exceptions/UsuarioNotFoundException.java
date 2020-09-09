@@ -7,6 +7,10 @@ public class UsuarioNotFoundException extends Exception {
 	
 	public UsuarioNotFoundException() {}
 	
+	public UsuarioNotFoundException(Long codigo) {
+		this.codigo = codigo;
+	}
+	
 	public Long getCodigo() {
 		return codigo;
 	}

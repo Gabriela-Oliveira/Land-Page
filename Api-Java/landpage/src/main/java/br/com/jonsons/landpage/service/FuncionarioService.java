@@ -24,7 +24,7 @@ public class FuncionarioService {
 	public Optional<Funcionarios> getById(Long codigo) throws FuncionarioNotFoundException {
 		Optional<Funcionarios> funcionario = funcionarioRepositorio.findById(codigo);
 		if(!funcionario.isPresent()) {
-			throw new FuncionarioNotFoundException();
+			throw new FuncionarioNotFoundException(codigo);
 		}
 		return funcionario;
 	}
@@ -33,7 +33,7 @@ public class FuncionarioService {
 		List<Funcionarios> listaFunc = funcionarioRepositorio.findAll();
 		for (Funcionarios func : listaFunc) {
 			if(funcionario.getCpf().equals(func.getCpf())) {
-				throw new CpfRepetidoException();
+				throw new CpfRepetidoException(funcionario.getCpf());
 			}
 		}
 		
@@ -46,7 +46,7 @@ public class FuncionarioService {
 	public Funcionarios update(Long codigo, Funcionarios funcionario) throws FuncionarioNotFoundException {
 		 Optional<Funcionarios> funcionarioAtualizado = funcionarioRepositorio.findById(codigo);
 		 if(!funcionarioAtualizado.isPresent()) {
-			 throw new FuncionarioNotFoundException();
+			 throw new FuncionarioNotFoundException(codigo);
 		 }
 		 Funcionarios fun = funcionarioAtualizado.get();
 		 if(funcionario.getCpf() != null) {
@@ -83,7 +83,7 @@ public class FuncionarioService {
 		public void delete(Long codigo) throws FuncionarioNotFoundException {
 			Optional<Funcionarios> funcionario = funcionarioRepositorio.findById(codigo);
 			if(!funcionario.isPresent()) {
-				throw new FuncionarioNotFoundException();
+				throw new FuncionarioNotFoundException(codigo);
 			}
 			funcionarioRepositorio.delete(funcionario.get());
 		}
