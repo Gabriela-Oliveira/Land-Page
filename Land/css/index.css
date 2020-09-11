@@ -1,0 +1,131 @@
+:root{ /* Pertmite criar variáveis globais */
+    --color-primary: #3C84B1;
+    --color-secundary: #1342ab;
+    --color-background: rgb(240, 235, 229);
+    --color-font: #eee;
+    --color-sombra: rgba(0, 0, 0, 0.2);
+}
+
+html, body{
+    margin:0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;   
+    background: var(--color-background);
+}
+
+.image-logo{
+    width: 50%;
+    margin: 30px 0 15px 110px;
+}
+
+ .col-sm-6{
+    margin: auto;
+}
+
+.information{
+    color: var(--color-font);
+    font-size: 19px;
+    margin-bottom: 30px;
+}
+
+.box-contact{
+    width: 250px;
+    background-color: var(--color-primary);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 33px;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 var(--color-sombra), 0 6px 20px 0 var(--color-sombra);
+}
+
+.form-group {
+    margin: center ;
+    color: var(--color-font);
+}
+
+#btn-submit{
+    color: var(--color-primary);
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background-color: var(--color-font);
+    color: var(--color-primary);
+    border: 0;
+    margin-top: 15px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+#btn-submit:hover{
+    background-color: var(--color-background);
+    cursor: pointer;
+}
+
+#btn-submit:focus, input:focus{
+    outline: none;
+}
+
+.form-group {
+    text-align: start;
+    color: var(--color-font); 
+}
+
+input {
+    background: transparent;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    padding-left: 0;
+    border:none;
+    border-bottom: 2px solid var(--color-font);
+    font-weight: 600;
+    color: var(--color-font);
+}
+
+hr {
+    width: 50%;
+}
+
+.image-corruption{
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 var(--color-sombra), 0 6px 20px 0 var(--color-sombra);
+}
+
+li{
+    margin-top: 40px;
+    font-weight: 900;
+    font-size: 16px;
+    margin-left: 20%;
+    margin-right: 20%;   
+}
+
+.photograph-marcus{
+    width: 50%;
+    border-radius: 50%;
+    margin-top: 50px;
+    margin-left: 20%;
+    margin-right: 20%; 
+    box-shadow: 0 4px 8px 0 var(--color-sombra), 0 6px 20px 0 var(--color-sombra);
+}
+
+.page-footer{
+    margin: 40px 0 10px 0;
+}
+
+.logo-jonsonsvelopers{
+    width: 4%;
+}
+
+
+
+
