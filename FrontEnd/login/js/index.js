@@ -1,0 +1,66 @@
+(() => {
+    let inputEmail = document.querySelector('#email');
+    let inputSenha = document.querySelector('#senha');
+    let btnEnviar = document.querySelector('#btn-entrar');
+    let alerta = document.querySelector('.alert');
+    let mensagem = document.querySelector('.mensagem');
+    let fechar = document.querySelector('.close');
+
+    //Validadndo e-mail e senha:
+    function _validarEmailSenha(){
+        let regexEmail = /^[a-z0-9.#-_]+@[a-z]+.[a-z]/i;
+        let regexSenha = /^[a-zA-Z0-9.@!#$%*]{6-10}/i;
+
+        if(!inputEmail.value || !inputSenha.value){
+            mostrarMensagem('Por favor preencha todos os campos !');
+            return;
+        }
+
+        if(!regexEmail.test(inputEmail.value) && !regexSenha.test(inputSenha.value)){
+            mostrarMensagem('E-mail ou senha inválidos', 'orange');
+            return;
+        }
+    }
+
+    function _procurarFuncionario(){
+        _validarEmailSenha();
+        let listaFuncionarios =  [];
+        fetch('http://localhost:9090/funcionario')
+        .then(response => response.json())
+        .then(response => {
+            listaFuncionarios = response;
+
+            for(funcionario of listaFuncionarios){
+                if(funcionario.email == inputEmail.value && funcionario.senha == inputSenha.value.toString()){
+                    alert('Tudo certo aqui cara só vai');
+                }
+
+    
+            }
+        })
+        .catch(err => console.log(err));
+    }
+
+    function mostrarMensagem(mensage, color){
+        alerta.classList.remove('esconder');
+        mensagem.textContent = mensage;
+        alerta.style.backgroundColor = color;
+        setTimeout(()=> {
+            alerta.classList.add('esconder');
+            alerta.style.backgroundColor = '';
+        }, 7000);
+
+        fechar.addEventListener('click', ()=> {
+            alerta.classList.add('esconder');
+            alerta.style.backgroundColor = '';
+        })
+    }
+
+    btnEnviar.addEventListener('click', (e)=>{
+        e.preventDefault();
+        _procurarFuncionario();
+
+    });
+
+
+})();
