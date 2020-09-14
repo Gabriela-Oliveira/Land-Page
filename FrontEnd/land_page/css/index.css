@@ -1,9 +1,10 @@
 :root{ /* Pertmite criar variáveis globais */
     --color-primary: #3C84B1;
-    --color-secundary: #1342ab;
     --color-background: rgb(240, 235, 229);
     --color-font: #eee;
     --color-sombra: rgba(0, 0, 0, 0.2);
+    --color-social: #262626;
+    --color-logo: #0a0091;
 }
 
 html, body{
@@ -18,7 +19,10 @@ html, body{
 
 .image-logo{
     width: 50%;
-    margin: 30px 0 15px 110px;
+    margin: 15px 0 15px 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto 
 }
 
  .col-sm-6{
@@ -36,7 +40,7 @@ html, body{
     background-color: var(--color-primary);
     margin-left: auto;
     margin-right: auto;
-    margin-top: 33px;
+    margin-top: 15px;
     padding: 30px;
     text-align: center;
     border-radius: 10px;
@@ -101,12 +105,18 @@ hr {
     box-shadow: 0 4px 8px 0 var(--color-sombra), 0 6px 20px 0 var(--color-sombra);
 }
 
-li{
-    margin-top: 40px;
+ul{
+    margin-top: 30px;
     font-weight: 900;
     font-size: 16px;
-    margin-left: 20%;
-    margin-right: 20%;   
+   
+}
+
+li{
+    margin-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
 }
 
 .photograph-marcus{
@@ -118,8 +128,38 @@ li{
     box-shadow: 0 4px 8px 0 var(--color-sombra), 0 6px 20px 0 var(--color-sombra);
 }
 
+.redes-sociais{
+    margin-left: 41%;
+    margin-right: auto;
+    margin-top: 10px;   
+}
+
+.social-insta:visited {
+    color: var(--color-social);
+}
+  
+.social-insta:hover, :active {
+    color: var(--color-sombra);
+}
+
+.social-face:visited {
+    color: var(--color-social);
+}
+  
+.social-face:hover, :active {
+    color: var(--color-sombra);
+}
+
+.link-footer:visited {
+    color: var(--color-logo);
+}
+  
+.link-footer:hover, :active {
+    color: var(--color-sombra);
+}
+ 
 .page-footer{
-    margin: 40px 0 10px 0;
+    margin: 20px 0 10px 0;
 }
 
 .logo-jonsonsvelopers{
