@@ -150,6 +150,14 @@ li{
     color: var(--color-sombra);
 }
 
+.social-face-1:visited {
+    color: var(--color-font);
+}
+  
+.social-face-1:hover, :active {
+    color: var(--color-sombra);
+}
+
 .link-footer:visited {
     color: var(--color-logo);
 }
@@ -157,7 +165,7 @@ li{
 .link-footer:hover, :active {
     color: var(--color-sombra);
 }
- 
+
 .page-footer{
     margin: 20px 0 10px 0;
 }
