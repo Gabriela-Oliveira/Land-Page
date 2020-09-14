@@ -1,0 +1,119 @@
+:root{ /* Pertmite criar variáveis globais */
+    --color-primary: #3C84B1;
+    --color-secundary: #1342ab;
+    --bg-geral: #eee;
+    --font-color: #fff;
+    --sombra-color: rgba(0, 0, 0, 0.2);
+}
+
+html, body{
+    margin:0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+    background: #0D75BB;
+}
+
+.box-login {
+    width: 250px;
+    background-color: #eee;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    padding-top: 15px;
+    text-align: center;
+    border-radius: 10px;
+    width: 250px;
+    box-shadow: 0 4px 8px 0 var(--sombra-color), 0 6px 20px 0 var(--sombra-color);
+    text-align: center;
+    
+}
+
+.group {
+    text-align: start;
+    margin-bottom: 20px;
+    color:#0D75BB; 
+}
+
+input {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 5px;
+    padding-left: 0;
+    border:0;
+    background-color: #eee;
+    border-bottom: 2px solid #0D75BB;
+
+    font-weight: 600;
+    color: #0D75BB;
+}
+
+#btn-entrar {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background-color: #0D75BB;
+    color: #fff;
+    border: 0;
+    margin-top: 15px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+#btn-entrar:hover{
+    background-color: #1342ab;
+    cursor: pointer;
+}
+
+.box-login h1 {
+    color:#0D75BB;
+    font-size: 40px;
+}
+
+.logo {
+    width: 100%;
+    padding: 37px 0px 37px 0px;
+}
+
+/* Remove a borda feiosa que o navegador coloca*/
+#btn-entrar:focus, input:focus{
+    outline: none;
+}
+
+
+/* Aqui começa o codigo da mensagem */
+
+.alert{
+    background-color: #FF5252; 
+    width: 380px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    padding: 20px;
+    padding-bottom: 0px;
+    border-radius: 5px;
+}
+
+.close{
+    float: right;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.close:hover{
+    cursor: pointer;
+}
+
+.esconder {
+    visibility: hidden;   
+}
+
