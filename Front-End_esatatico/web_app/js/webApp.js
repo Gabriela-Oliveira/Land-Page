@@ -60,7 +60,7 @@ var info = (() => {
             tdWhatsapp.textContent = u.whatsapp;
             tdAcoes.innerHTML = `
             <button class="btn btn-outline-primary btn-sm "
-            onClick="info.apagarUsuario(${u.id})"><i class="fas fa-trash-alt"></i> Excluir</button>
+            onClick="info.apagarUsuario(${u.codigo})"><i class="fas fa-trash-alt"></i> Excluir</button>
             `;
 
             // Tenho que add as minhas tds na minha tr.
@@ -74,6 +74,7 @@ var info = (() => {
         });
 
     }
+    _popularTabelaUsuario(users);
 
     function _popularTabelaFuncionario(listaFuncionarios){
         let tabelaFuncionarios = document.querySelector('.tableFuncionario')
@@ -149,7 +150,8 @@ var info = (() => {
         let index = users.indexOf(usuario);
         if(index > -1){
             users.splice(index, 1);
-            console.log(users)
+        _popularTabelaUsuario(users);
+            
         }
     }
 
@@ -167,7 +169,8 @@ var info = (() => {
     }
 
     return{
-        apagarFuncionario
+        apagarFuncionario,
+        apagarUsuario
     }
 
 
