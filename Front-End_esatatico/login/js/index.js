@@ -6,6 +6,15 @@
     let mensagem = document.querySelector('.mensagem');
     let fechar = document.querySelector('.close');
 
+    let funcionario = {};
+    let funcionarios = [{codigo: 1,
+    nome: "Iago Murilo Joaquim da Cruz",
+    cpf: "32842391543",
+    email: "iagomurilojoaquimdacruz-82@msn.com",
+    senha: "123456",
+    datanascimento: "1956-06-10",
+    salario: 6000.0,
+    endereco: 1}];
     //Validadndo e-mail e senha:
     function _validarEmailSenha(){
         let regexEmail = /^[a-z0-9.#-_]+@[a-z]+.[a-z]/i;
@@ -24,21 +33,15 @@
 
     function _procurarFuncionario(){
         _validarEmailSenha();
-        let listaFuncionarios =  [];
-        fetch('http://localhost:9090/funcionario')
-        .then(response => response.json())
-        .then(response => {
-            listaFuncionarios = response;
 
-            for(funcionario of listaFuncionarios){
+            for(funcionario of funcionarios){
                 if(funcionario.email == inputEmail.value && funcionario.senha == inputSenha.value.toString()){
-                    alert('Tudo certo aqui cara só vai');
+                    mostrarMensagem("Login efetuado com sucesso!", 'green');
+                    window.location.href = '../../../Front-End_esatatico/web_app/index.html';
                 }
 
     
             }
-        })
-        .catch(err => console.log(err));
     }
 
     function mostrarMensagem(mensage, color){
