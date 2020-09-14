@@ -1,10 +1,10 @@
 :root{ /* Pertmite criar variáveis globais */
     --color-primary: #3C84B1;
-    --color-secundary: #1342ab;
     --color-background: rgb(240, 235, 229);
     --color-font: #eee;
     --color-sombra: rgba(0, 0, 0, 0.2);
     --color-social: #262626;
+    --color-logo: #0a0091;
 }
 
 html, body{
@@ -128,20 +128,38 @@ li{
     box-shadow: 0 4px 8px 0 var(--color-sombra), 0 6px 20px 0 var(--color-sombra);
 }
 
-.face-teacher{
-    display: block;  
+.redes-sociais{
+    margin-left: 41%;
+    margin-right: auto;
+    margin-top: 10px;   
 }
 
-.face-teacher:visited {
+.social-insta:visited {
     color: var(--color-social);
 }
   
-.face-teacher:hover, :active {
+.social-insta:hover, :active {
     color: var(--color-sombra);
 }
+
+.social-face:visited {
+    color: var(--color-social);
+}
   
+.social-face:hover, :active {
+    color: var(--color-sombra);
+}
+
+.link-footer:visited {
+    color: var(--color-logo);
+}
+  
+.link-footer:hover, :active {
+    color: var(--color-sombra);
+}
+ 
 .page-footer{
-    margin: 40px 0 10px 0;
+    margin: 20px 0 10px 0;
 }
 
 .logo-jonsonsvelopers{
