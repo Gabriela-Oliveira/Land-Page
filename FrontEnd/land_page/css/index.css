@@ -151,7 +151,7 @@ li{
 }
 
 .social-face-1:visited {
-    color: var(--color-font);
+    color: var(--color-primary);
 }
   
 .social-face-1:hover, :active {
