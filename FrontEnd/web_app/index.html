@@ -11,23 +11,22 @@
 
 <body>
 
-
-
     <div class="col-sm-12">
         <img class="image-logo" src="./img/logo é possível1.png" alt="Logo # é possível fazer">
     </div>
 
     <div class="container">
         <div class="row">
-            <div class="btn-button col-sm-12 relative text-center">
-                <button type="button" class="btn btn-primary">Funcionário</button>
-                <button type="button" class="btn btn-primary">Usuário</button>
+            <div class="btn-button col-sm-12 relative text-center js-scroll-trigger" href="#table">
+                <button type="button" class="btn-employee btn-primary">Funcionário</button>
+                <button type="button" class="btn-user btn-primary">Usuário</button>
             </div>
         </div>
     </div>
 
+    <!-- <a class="btn btn-primary btn-xl js-scroll-trigger" href="#table"></a> -->
 
-    <table class="table table-hover">
+    <table class="table table-hover" id="table">
         <thead>
             <tr>
                 <th>Código</th>
@@ -57,7 +56,6 @@
                 <th>Código</th>
                 <th>Nome</th>
                 <th>WhatsApp</th>
-               
             </tr>
         </thead>
         <tbody>
@@ -65,7 +63,6 @@
                 <td>1</td>
                 <td>Gabriela Oliveira</td>
                 <td>99542-5968</td>
-                
             </tr>
         </tbody>
     </table>
@@ -74,6 +71,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="jquery/jquery.min.js"></script>   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 </body>
 
 </html>
