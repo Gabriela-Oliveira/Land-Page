@@ -27,31 +27,26 @@
     </div>
 
 
-    <table class="table table-hover">
+    <table class="funcionario table table-hover">
         <thead>
             <tr>
                 <th>Código</th>
                 <th>Nome</th>
                 <th>CPF</th>
                 <th>Email</th>
+                <th>Senha</th>
                 <th>Data de Nascimento</th>
                 <th>Endereço</th>
                 <th>Salario</th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Gabriela Oliveira</td>
-                <td>142.254.368-85</td>
-                <td>gaby@example.com</td>
-                <td>25/01/1997</td>
-            </tr>
+        <tbody class="tableFuncionario">
+
         </tbody>
     </table>
     </div>
     <br>
-    <table class="table table-hover">
+    <table class="usuario table table-hover">
         <thead>
             <tr>
                 <th>Código</th>
@@ -60,20 +55,129 @@
                
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Gabriela Oliveira</td>
-                <td>99542-5968</td>
-                
-            </tr>
+        <tbody class="tableUsuario">
+
         </tbody>
     </table>
+
+    <div id="modal-adicionar"class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Editar Informações do funcionario</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+    
+            <div class="row">
+              <form autocomplete="off">
+    
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="nome">Nome:</label>
+                      <input autocomplete="off" type="text" class="form-control" id="nome">
+                    </div>
+                  </div>
+    
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="cpf">CPF:</label>
+                      <input autocomplete="off" type="text" class="form-control" id="cpf">
+                    </div>
+                  </div>
+    
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="email">Email:</label>
+                      <input class="form-control" id="email">
+    
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label for="senha">Senha:</label>
+                      <input class="form-control" id="senha">
+    
+                    </div>
+                  </div>
+    
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="salario">Salario</label>
+                      <input type="email" class="form-control" id="salario">
+                    </div>
+    
+                  </div>
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="data-nascimento">Data de nascimento:</label>
+                          <input type="text" class="form-control" id="data-nascimento">
+                        </div>
+                      </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="cep">CEP:</label>
+                        <input class="form-control" type="text" id="cep">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="rua">Rua:</label>
+                        <input class="form-control" type="text" id="rua">
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <div class="form-group">
+                        <label for="numero">Numero:</label>
+                        <input type="text" class="form-control" id="numero">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="bairro">Bairoo:</label>
+                        <input type="text" class="form-control" id="bairro">
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="cidade">Cidade:</label>
+                        <input type="text" class="form-control" id="cidade">
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="estado">Estado:</label>
+                          <input type="text" class="form-control" id="estado">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+            </div>
+        </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="save">Save changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancel">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="./js/webApp.js"></script>
 </body>
 
 </html>

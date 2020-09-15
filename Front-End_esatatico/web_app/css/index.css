@@ -17,3 +17,7 @@ html, body{
     font-family: 'Roboto', sans-serif;   
     background: var(--color-background);
 }
+
+.hidden{
+    display: none;
+}
