@@ -1,6 +1,6 @@
 let info = (() => {
 
-    let todasInputs = document.querySelectorAll('form input');
+    let todasInputs = document.querySelectorAll('#modal-adicionar form input');
     let btnAdicionar = document.querySelector('#btn-adicionar');
 
     let inputNome = document.querySelector('#nome');
@@ -17,227 +17,268 @@ let info = (() => {
     let inputCidade = document.querySelector('#cidade');
     let inputEstado = document.querySelector('#estado');
 
+    let inputNomeEditar = document.querySelector('#modal-editar #nome');
+    let inputCpfEditar = document.querySelector('#modal-editar #cpf');
+    let inputEmailEditar = document.querySelector('#modal-editar #email');
+    let inputSenhaEditar = document.querySelector('#modal-editar #senha');
+    let inputNascimentoEditar = document.querySelector('#modal-editar #data-nascimento');
+    let inputSalarioEditar = document.querySelector('#modal-editar #salario');
+
+    let inputCepEditar = document.querySelector('#modal-editar #cep');
+    let inputRuaEditar = document.querySelector('#modal-editar #rua');
+    let inputBairroEditar = document.querySelector('#modal-editar #bairro');
+    let inputNumeroEditar = document.querySelector('#modal-editar #numero');
+    let inputCidadeEditar = document.querySelector('#modal-editar #cidade');
+    let inputEstadoEditar = document.querySelector('#modal-editar #estado');
+
     let btnSalvar = document.querySelector('#save');
     let btnCancelar = document.querySelector('#cancel');
 
-    let btnFuncionario = document.querySelector('#btn-funcionario');
-    let btnUsuario = document.querySelector('#btn-usuario');
+    let btnSalvarEdicao = document.querySelector('#salvar-edicao');
+    let btnCancelarEdicao = document.querySelector('#cancelar-edicao');
+
+
     let tabelaFuncionario = document.querySelector('.funcionario');
     let tabelaUsuario = document.querySelector('.usuario');
-    
+
+    //Regex que serão usados
+
+    let regexEmail = /[A-Za-z0-9._-]+@[A-Za-z0-9._-]+.[A-Za-z]/gi;
+    let regexpf = /[0-9]{11}/gi;
+
+    function _validarRegex(regex, campo){
+        if(!regex.test(campo)){
+            alert('campo inválido!!');
+            return;
+        }
+    }
+
 
     //GET toda lista de pessoas participando por meio do cadastro na land_page
     let listaBackupUsuarios = [];
-    function _mostrarTodosAsPessoas(){
+    function _mostrarTodosAsPessoas() {
         const url = 'http://localhost:9090/usuario';
         fetch(url)
-        .then(response => response.json())
-        .then(response => _popularTabelaUsuario(response))
-        .catch(err => console.log(err));
+            .then(response => response.json())
+            .then(response => _popularTabelaUsuario(response))
+            .catch(err => console.log(err));
     }
 
-_mostrarTodosAsPessoas();
+    _mostrarTodosAsPessoas();
+
     //GET de uma pessoa apenas pelo codigo
-    function apagarUsuario(codigo){
+    function apagarUsuario(codigo) {
         fetch(`http://localhost:9090/usuario/${codigo}`, {
             method: 'DELETE',
             headers: {
-            'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             }
         }
 
         )
-        .then(response => console.log(response))
-        .then(response => _mostrarTodosAsPessoas())
-        .catch(err => console.log(err));
-        
+            .then(response => console.log(response))
+            .then(response => _mostrarTodosAsPessoas())
+            .catch(err => console.log(err));
+
     }
 
-    var listaBackupEnderecos = []; 
+    function apagarFuncionario(codigo) {
+        fetch(`http://localhost:9090/funcionario/${codigo}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        )
+            .then(response => console.log(response))
+            .then(response => _pegarTodosOsfuncionarios())
+            .catch(err => console.log(err));
+
+    }
+
+
+    var listaBackupEnderecos = [];
 
 
     //GET lista de todos os funcionarios
     let listaBackupFuncionarios = [];
-    function _pegarTodosOsfuncionarios(){
+    function _pegarTodosOsfuncionarios() {
         const url = 'http://localhost:9090/funcionario';
         fetch(url)
-        .then(response => response.json())
-        .then(response => {
-            listaBackupFuncionarios = response;
-            fetch('http://localhost:9090/endereco')
             .then(response => response.json())
             .then(response => {
-                listaBackupEnderecos = response;
-                _popularTabelaFuncionario(listaBackupFuncionarios, listaBackupEnderecos);
+                listaBackupFuncionarios = response;
+                fetch('http://localhost:9090/endereco')
+                    .then(response => response.json())
+                    .then(response => {
+                        listaBackupEnderecos = response;
+                        _popularTabelaFuncionario(listaBackupFuncionarios, listaBackupEnderecos);
+                    })
+                    .catch(err => console.log(err));
+
             })
             .catch(err => console.log(err));
-                    
-        })
-        .catch(err => console.log(err));
     }
 
     _pegarTodosOsfuncionarios();
-    
 
 
-    //GET de um e apenas um funcionario pelo codigo
-    let funcionario = {};
-    function _pegarPorCodigo(codigo){
-        const url = `http://localhost:9090/funcionario/`;
-        fetch(url + codigo)
-        .then(response => response.json())
-        .then(response => funcionario = response)
-        .catch(err => console.log(err));
-    }
 
-    function editarFuncionario(codigo){
+    function editarFuncionario(codigo) {
 
-        $('#modal-adicionar').modal({backdrop: 'static'});
+        $('#modal-editar').modal({ backdrop: 'static' });
 
         fetch(`http://localhost:9090/funcionario/${codigo}`)
-        .then(response => response.json())
-        .then(response => {
-            inputNome.value = response.nome;
-            inputCpf.value = response.cpf;
-            inputEmail.value = response.email;
-            inputSenha.value = response.senha;
-            inputNascimento.value = response.datanascimento;
-            inputSalario.value = response.salario;
-
-            fetch(`http://localhost:9090/endereco/${response.endereco}`)
             .then(response => response.json())
-            .then(res => {
-        
-                        inputBairro.value = res.bairro;
-                        inputCep.value = res.cep;
-                        inputCidade.value = res.cidade;
-                        inputEstado.value = res.estado;
-                        inputNumero.value = res.numero;
-                        inputRua.value = res.rua;
-                        
-        
-        
-                btnSalvar.addEventListener('click', e => {
-                    e.preventDefault();
-                    let enderecoAtualizado = {
-                        
-                        cep:inputCep.value,
-                        rua:inputRua.value,
-                        bairro:inputBairro.value,
-                        numero:inputNumero.value,
-                        cidade:inputCidade.value,
-                        estado:inputEstado.value
-                    }
-                    fetch(`http://localhost:9090/endereco/${res.codigo}`, {
-                        method: 'PUT',
-                        body: JSON.stringify(enderecoAtualizado),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(response => {
-                        let funcionarioAtualizado = {
-                            
-                            nome: inputNome.value,
-                            cpf: inputCpf.value,
-                            email: inputEmail.value,
-                            senha: inputSenha.value,
-                            dataNascimento: inputNascimento.value,
-                            salario: inputSalario.value,
-                            endereco: res.codigo
-                        }
-                        fetch(`http://localhost:9090/funcionario/${codigo}`, {
-                        method: 'PUT',
-                        body: JSON.stringify(funcionarioAtualizado),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(response => {
-                        _pegarTodosOsfuncionarios();
-                    })
-                    .catch(err => console.log(err))
-                    })
-                    .catch(err => console.log(err))
-                   
-                })
-        
-            
-            }).catch(err => console.log(err))
+            .then(response => {
+                
+                inputNomeEditar.value = response.nome;
+                inputCpfEditar.value = response.cpf;
+                inputEmailEditar.value = response.email;
+                inputSenhaEditar.value = response.senha;
+                inputNascimentoEditar.value = response.datanascimento;
+                inputSalarioEditar.value = response.salario;
 
-        })
+                fetch(`http://localhost:9090/endereco/${response.endereco}`)
+                    .then(response => response.json())
+                    .then(res => {
+
+                        inputBairroEditar.value = res.bairro;
+                        inputCepEditar.value = res.cep;
+                        inputCidadeEditar.value = res.cidade;
+                        inputEstadoEditar.value = res.estado;
+                        inputNumeroEditar.value = res.numero;
+                        inputRuaEditar.value = res.rua;
+
+
+                        btnSalvarEdicao.addEventListener('click', e => {
+                            e.preventDefault();
+                            _validarRegex(regexEmail, inputEmail.value);
+                            _validarRegex(regexpf, inputCpf.value);
+                            let enderecoAtualizado = {
+                                
+                                cep: inputCep.value,
+                                rua: inputRua.value,
+                                bairro: inputBairro.value,
+                                numero: inputNumero.value,
+                                cidade: inputCidade.value,
+                                estado: inputEstado.value
+                            }
+                            fetch(`http://localhost:9090/endereco/${res.codigo}`, {
+                                method: 'PUT',
+                                body: JSON.stringify(enderecoAtualizado),
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            })
+                                .then(response => response.json())
+                                .then(response => {
+
+                                    let funcionarioAtualizado = {
+                                        nome: inputNome.value,
+                                        cpf: inputCpf.value,
+                                        email: inputEmail.value,
+                                        senha: inputSenha.value,
+                                        dataNascimento: inputNascimento.value,
+                                        salario: inputSalario.value,
+                                        endereco: res.codigo
+                                    }
+                                    fetch(`http://localhost:9090/funcionario/${codigo}`, {
+                                        method: 'PUT',
+                                        body: JSON.stringify(funcionarioAtualizado),
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        }
+                                    })
+                                        .then(response => response.json())
+                                        .then(response => {
+                                            _pegarTodosOsfuncionarios();
+                                            return;
+                                        })
+                                        .catch(err => console.log(err))
+                                })
+                                .catch(err => console.log(err))
+
+                        })
+
+
+                    }).catch(err => console.log(err))
+
+            })
     }
 
-    function _adicionarFuncionario(){
+    function _adicionarFuncionario() {
 
-        $('#modal-adicionar').modal({backdrop: 'static'});
+        $('#modal-adicionar').modal({ backdrop: 'static' });
 
+        for (let input of todasInputs) {
+            input.value = '';
+        }
         btnSalvar.addEventListener('click', e => {
             e.preventDefault();
 
-            for(let input of todasInputs){
-                if(!input.value){
+            for (let input of todasInputs) {
+                if (!input.value) {
                     alert('Por favor preencha todos os campos');
                     return;
                 }
             }
+            _validarRegex(regexEmail, inputEmail.value);
+            _validarRegex(regexpf, inputCpf.value);
 
             let endereco = {
-                cep:inputCep.value,
-                rua:inputRua.value,
-                bairro:inputBairro.value,
-                numero:inputNumero.value,
-                cidade:inputCidade.value,
-                estado:inputEstado.value
+                cep: inputCep.value,
+                rua: inputRua.value,
+                bairro: inputBairro.value,
+                numero: inputNumero.value,
+                cidade: inputCidade.value,
+                estado: inputEstado.value
             }
 
-
-           
-
             fetch(`http://localhost:9090/endereco`, {
-               method: 'POST',
-               body: JSON.stringify(endereco),
-               headers:{
-                'Content-Type': 'application/json'
-               }
-                
-            })
-            .then(response => response.json())
-            .then(res =>{ 
-                let funcionario = {
-                    nome: inputNome.value,
-                    cpf: inputCpf.value,
-                    email: inputEmail.value,
-                    senha: inputSenha.value,
-                    dataNascimento: inputNascimento.value,
-                    salario: inputSalario.value,
-                    endereco: res.codigo
-                    
-                }
-                fetch('http://localhost:9090/funcionario', {
                 method: 'POST',
-                body: JSON.stringify(funcionario),
+                body: JSON.stringify(endereco),
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            }).then()
+
+            })
+                .then(response => response.json())
+                .then(res => {
+
+                    let funcionario = {
+                        nome: inputNome.value,
+                        cpf: inputCpf.value,
+                        email: inputEmail.value,
+                        senha: inputSenha.value,
+                        datanascimento: inputNascimento.value,
+                        salario: inputSalario.value,
+                        endereco: res.codigo
+
+                    }
+                    fetch('http://localhost:9090/funcionario', {
+                        method: 'POST',
+                        body: JSON.stringify(funcionario),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then(response => {
+                            response.json();
+                        })
+                        .then(response => {
+                            console.log(response);
+                            _pegarTodosOsfuncionarios();
+                        })
+                        .catch(err => console.log(err));
+
+                })
         })
-
-
-
-
-
-            _popularTabelaFuncionario(funcionarios);
-        })
-
     }
-        
 
 
-
-    function _popularTabelaUsuario(users){
+    function _popularTabelaUsuario(users) {
         let tabelaUsuarios = document.querySelector('.tableUsuario')
         //Limpa a tabela para não repetir os dados
 
@@ -267,12 +308,20 @@ _mostrarTodosAsPessoas();
             tr.appendChild(tdNome);
             tr.appendChild(tdWhatsapp);
             tr.appendChild(tdAcoes);
-            
+
             tabelaUsuarios.appendChild(tr);
         });
 
     }
-    function _popularTabelaFuncionario(listaFuncionarios, listaBackupEnderecos){
+
+    function _pegarEndereco(listaBackupEnderecos, endereco) {
+        for (let valor of listaBackupEnderecos) {
+            if (valor.codigo == endereco) {
+                return valor.cep;
+            }
+        }
+    }
+    function _popularTabelaFuncionario(listaFuncionarios, listaBackupEnderecos) {
         let tabelaFuncionarios = document.querySelector('.tableFuncionario')
         // Aqui eu limpo a tabela inteira
         tabelaFuncionarios.textContent = "";
@@ -298,13 +347,7 @@ _mostrarTodosAsPessoas();
             tdEmail.textContent = f.email;
             tdSenha.textContent = f.senha;
             tdNascimento.textContent = f.datanascimento;
-                tdEndereco.textContent = listaBackupEnderecos.map(e => {
-                    if(e.codigo == f.codigo){
-                        console.log(e);
-                        return e.cep;
-                    }    
-                });
-            
+            tdEndereco.textContent = _pegarEndereco(listaBackupEnderecos, f.endereco);
             tdSalario.textContent = f.salario;
             tdAcoes.innerHTML = `
             <button
@@ -315,7 +358,7 @@ _mostrarTodosAsPessoas();
             <button class="btn btn-outline-primary btn-sm excluir"
             onClick="info.apagarFuncionario(${f.codigo})"><i class="fas fa-trash-alt"></i> Excluir</button>
             `;
-            
+
             // Tenho que add as minhas tds na minha tr.
 
             tr.appendChild(tdCodigo);
@@ -327,15 +370,22 @@ _mostrarTodosAsPessoas();
             tr.appendChild(tdEndereco);
             tr.appendChild(tdSalario);
             tr.appendChild(tdAcoes);
-            
+
             tabelaFuncionarios.appendChild(tr);
-            
+
         });
-        
+
     }
+
+    btnAdicionar.addEventListener('click', e => {
+        e.preventDefault();
+        _adicionarFuncionario();
+    })
 
     return {
         apagarUsuario,
-        editarFuncionario
+        editarFuncionario,
+        apagarFuncionario
     }
+    
 })()
