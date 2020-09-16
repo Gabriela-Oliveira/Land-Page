@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" href="./img/Logo.png">
     <title>Web App</title>
@@ -12,10 +12,15 @@
 
 <body>
 
-    <div class="col-sm-12">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
         <img class="image-logo" src="./img/logo é possível1.png" alt="Logo # é possível fazer">
+      </div>
     </div>
+  </div>
 
+<<<<<<< HEAD
     <div class="container">
         <div class="row">
             <div class="btn-button col-sm-12 relative text-center">
@@ -35,30 +40,44 @@
     <table class="table table-hover" id="table">
 
         <thead>
-            <tr>
-                <th>Código</th>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>Email</th>
-                <th>Senha</th>
-                <th>Data de Nascimento</th>
-                <th>Endereço</th>
-                <th>Salario</th>
-            </tr>
-        </thead>
-        <tbody class="tableFuncionario">
+=======
+  <div class="container">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#funcionario">Funcionário</a></li>
+      <li><a data-toggle="tab" href="#usuario" id="btn-usuario">Usuário</a></li>
+      <li><a data-toggle="tab" href="#adicionar-funcionario">Adicionar Funcionário</a></li>
+    </ul>
 
-        </tbody>
-    </table>
-    </div>
-    <br>
-    <table class="usuario table table-hover">
-        <thead>
+    <div class="tab-content">
+      <div id="funcionario" class="tab-pane fade in active">
+        <table class="funcionario table table-hover">
+          <thead>
+>>>>>>> 3dbe8345b0f7c9ecf1564016d0503f71e197af0b
             <tr>
-                <th>Código</th>
-                <th>Nome</th>
-                <th>WhatsApp</th>
+              <th>Código</th>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>Email</th>
+              <th>Senha</th>
+              <th>Data de Nascimento</th>
+              <th>Endereço</th>
+              <th>Salario</th>
             </tr>
+          </thead>
+          <tbody class="tableFuncionario">
+          </tbody>
+        </table>
+      </div>
+
+      <div id="usuario" class="tab-pane fade">
+        <table class="usuario table table-hover">
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Nome</th>
+              <th>WhatsApp</th>
+            </tr>
+<<<<<<< HEAD
         </thead>
 
         <tbody class="tableUsuario">
@@ -68,6 +87,19 @@
 
         </tbody>
     </table>
+=======
+          </thead>
+          <tbody class="tableUsuario">
+          </tbody>
+        </table>
+      </div>
+
+      <div id="adicionar-funcionario" class="tab-pane fade"></div>
+
+    </div>
+  </div>
+  </div>
+>>>>>>> 3dbe8345b0f7c9ecf1564016d0503f71e197af0b
 
     <div id="modal-adicionar"class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -295,14 +327,18 @@
       </div>
     </div>
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     
-    <!-- <script src="jquery/jquery.min.js"></script>   
-      <script src="vendor/jquery-easing/jquery.easing.min.js"></script> -->
       <script src="./js/webApp.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="./js/webApp.js"></script>
+
 
 </body>
 

@@ -4,6 +4,8 @@
     --color-background: rgb(240, 235, 229);
     --color-font: #eee;
     --color-sombra: rgba(0, 0, 0, 0.2);
+    --color-social: #262626;
+    --color-logo: #0a0091;
 }
 
 html, body{
@@ -14,9 +16,17 @@ html, body{
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;   
     background: var(--color-background);
-    width: 90%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto; 
+}
+
+.hidden{
+    display: none;
+}
+
+.modal-content{
+    width: 850px;
 }
 
 .image-logo{
@@ -24,39 +34,11 @@ html, body{
     display: block;
     margin-left: auto;
     margin-right: auto; 
-    margin-top: 50px;
+    margin-top: 60px;
 }
 
-.btn-button{
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
-    margin-bottom: 100px; 
-}
-
-.btn-button:focus, button:focus{
-    outline: none;
-}
-
-.btn-employee{
-    margin-right: 20px;
-    box-shadow: 0 4px 8px 0 var(--color-sombra), 0 6px 20px 0 var(--color-sombra);
-    background:var(--color-primary);
-}
-
-.btn-employee:hover{
-    background:var(--color-secundary);
-}
-
-.btn-user{
-    margin-left: 20px;
-    padding: 1px 15px 1px 15px;
-    box-shadow: 0 4px 8px 0 var(--color-sombra), 0 6px 20px 0 var(--color-sombra);
-    background:var(--color-primary);
-}
-
-.btn-user:hover{
-    background:var(--color-secundary);
+.nav-tabs{
+    margin-top: 60px;
 }
 
 tbody{

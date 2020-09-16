@@ -44,7 +44,8 @@ html, body{
     padding: 30px;
     text-align: center;
     border-radius: 10px;
-    width: 250px;
+    width: 330px;
+    float: right;
     text-align: center;
     box-shadow: 0 4px 8px 0 var(--color-sombra), 0 6px 20px 0 var(--color-sombra);
 }
