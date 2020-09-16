@@ -20,39 +20,19 @@
     </div>
   </div>
 
-<<<<<<< HEAD
-    <div class="container">
-        <div class="row">
-            <div class="btn-button col-sm-12 relative text-center">
-                <button type="button" class="btn-employee btn-primary">Funcionário</button>
-                <button type="button" class="btn-user btn-primary">Usuário</button>
-                <button id="btn-adicionar" type="button" class="btn-employee btn-primary">Adicionar</button>
 
-            </div>
-        </div>
-    </div>
-
-    <!-- <a class="btn btn-primary btn-xl js-scroll-trigger" href="#table"></a> -->
-
-
-    <table class="funcionario table table-hover">
-
-    <table class="table table-hover" id="table">
-
-        <thead>
-=======
   <div class="container">
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" href="#funcionario">Funcionário</a></li>
       <li><a data-toggle="tab" href="#usuario" id="btn-usuario">Usuário</a></li>
-      <li><a data-toggle="tab" href="#adicionar-funcionario">Adicionar Funcionário</a></li>
+      <li><a id="btn-adicionar" data-toggle="tab" href="#adicionar-funcionario">Adicionar Funcionário</a></li>
     </ul>
 
     <div class="tab-content">
       <div id="funcionario" class="tab-pane fade in active">
         <table class="funcionario table table-hover">
           <thead>
->>>>>>> 3dbe8345b0f7c9ecf1564016d0503f71e197af0b
+
             <tr>
               <th>Código</th>
               <th>Nome</th>
@@ -77,17 +57,7 @@
               <th>Nome</th>
               <th>WhatsApp</th>
             </tr>
-<<<<<<< HEAD
-        </thead>
 
-        <tbody class="tableUsuario">
-
-
-        <tbody>
-
-        </tbody>
-    </table>
-=======
           </thead>
           <tbody class="tableUsuario">
           </tbody>
@@ -99,7 +69,7 @@
     </div>
   </div>
   </div>
->>>>>>> 3dbe8345b0f7c9ecf1564016d0503f71e197af0b
+
 
     <div id="modal-adicionar"class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -319,8 +289,26 @@
             </div>
         </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="salvar-edicao">Save changes</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" id="salvar-edicao">Save changes</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelar-edicao">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="modal-exclusao"class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Deseja realmente Excluir?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+              <button id="confirmar" type="button" class="btn btn-primary" data-dismiss="modal" id="salvar-edicao">Confirmar</button>
+              <button id="cancelar" type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelar-edicao">Cancelar</button>
             </div>
           </div>
         </div>
@@ -337,6 +325,7 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="./js/webApp.js"></script>
 
 

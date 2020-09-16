@@ -1,4 +1,4 @@
-var info = (() => {
+let info = (() => {
     let todasInputs = document.querySelectorAll('form input');
     let btnAdicionar = document.querySelector('#btn-adicionar');
 
@@ -15,6 +15,27 @@ var info = (() => {
     let inputNumero = document.querySelector('#numero');
     let inputCidade = document.querySelector('#cidade');
     let inputEstado = document.querySelector('#estado');
+
+    let inputNomeEditar = document.querySelector('#modal-editar #nome');
+    let inputCpfEditar = document.querySelector('#modal-editar #cpf');
+    let inputEmailEditar = document.querySelector('#modal-editar #email');
+    let inputSenhaEditar = document.querySelector('#modal-editar #senha');
+    let inputNascimentoEditar = document.querySelector('#modal-editar #data-nascimento');
+    let inputSalarioEditar = document.querySelector('#modal-editar #salario');
+
+    let inputCepEditar = document.querySelector('#modal-editar #cep');
+    let inputRuaEditar = document.querySelector('#modal-editar #rua');
+    let inputBairroEditar = document.querySelector('#modal-editar #bairro');
+    let inputNumeroEditar = document.querySelector('#modal-editar #numero');
+    let inputCidadeEditar = document.querySelector('#modal-editar #cidade');
+    let inputEstadoEditar = document.querySelector('#modal-editar #estado');
+
+
+    let btnSalvarEdicao = document.querySelector('#salvar-edicao');
+    let btnCancelarEdicao = document.querySelector('#cancelar-edicao');
+
+    let btnConfirmar = document.querySelector('#confirmar');
+    let btnCancelarExclusao = document.querySelector('#cancelar');
 
     let btnSalvar = document.querySelector('#save');
     let btnCancelar = document.querySelector('#cancel');
@@ -60,10 +81,18 @@ var info = (() => {
     }];
      let endereco = {};
 
-    let btnFuncionario = document.querySelector('#btn-funcionario');
-    let btnUsuario = document.querySelector('#btn-usuario');
-    let tabelaFuncionario = document.querySelector('.funcionario');
-    let tabelaUsuario = document.querySelector('.usuario')
+
+    let regexEmail = /[A-Za-z0-9._-]+@[A-Za-z0-9._-]+.[A-Za-z]/gi;
+    let regexpf = /[0-9]{11}/gi;
+    let regexData = /[0-9]{4}[-]{1}[0-90-9]{2}[-]{1}[0-90-9]{2}/g;
+
+    function _validarRegex(regex, campo){
+        if(!regex.test(campo)){
+            swal("Os campos valores não reconhecidos pelo sistema", "Clique no botão para fechar está janela", "warning");
+            return;
+        }
+    }
+
 
     _popularTabelaFuncionario(funcionarios);
 
@@ -170,7 +199,6 @@ var info = (() => {
     function _pegarPorCodigoUsuario(codigo){
         for(let user1 of users){
             if(user1.codigo == codigo){
-                console.log(user1);
                 user = user1;
                 return user;
             }
@@ -178,30 +206,42 @@ var info = (() => {
     }
 
     function apagarFuncionario(codigo){
-        let funcionario = _pegarPorCodigoFuncionario(codigo);
-        let index = funcionarios.indexOf(funcionario);
-        if(index > -1){
-            funcionarios.splice(index, 1);
-            alert('deu certo');
-        }
-        _popularTabelaFuncionario(funcionarios);
+
+
+        $('#modal-exclusao').modal({backdrop: 'static'})
+
+        btnConfirmar.addEventListener('click', e => {
+            e.preventDefault();
+            let funcionario = _pegarPorCodigoFuncionario(codigo);
+            let index = funcionarios.indexOf(funcionario);
+            if(index > -1){
+                funcionarios.splice(index, 1);
+                alert('deu certo');
+            }
+            _popularTabelaFuncionario(funcionarios);
+            })
     }
 
     function apagarUsuario(codigo){
-        let usuario = _pegarPorCodigoUsuario(codigo);
-        let index = users.indexOf(usuario);
-        if(index > -1){
-            users.splice(index, 1);
-        _popularTabelaUsuario(users);
+
+        $('#modal-exclusao').modal({backdrop: 'static'})
+
+        btnConfirmar.addEventListener('click', e => {
+            e.preventDefault();            
+            let usuario = _pegarPorCodigoUsuario(codigo);
+            let index = users.indexOf(usuario);
+            if(index > -1){
+                users.splice(index, 1);
+            _popularTabelaUsuario(users);
+            }
+            });
             
-        }
     }
     //GET de um e apenas um funcionario pelo codigo
     function _pegarPorCodigoFuncionario(codigo){
         for(let funcionario1 of funcionarios){
             if(funcionario1.codigo == codigo){
                 funcionario = funcionario1
-                console.log(funcionario);
                 return funcionario;
             }
         }
@@ -214,13 +254,15 @@ var info = (() => {
         btnSalvar.addEventListener('click', e => {
             e.preventDefault();
 
-            for(let input of todasInputs){
-                if(!input.value){
-                    alert('Por favor preencha todos os campos');
-                    return;
-                }
+            if (!inputCep.value || !inputRua.value || !inputBairro.value || !inputNumero.value || !inputCidade.value || !inputEstado.value
+                || !inputNome.value || !inputCpf.value || !inputEmail.value || !inputSenha.value || !inputNascimento.value || !inputSalario.value) {
+                swal("Campo vazio!", "Preencha todos os campos por favor!", "warning");
+                    
+                return;
             }
-
+            _validarRegex(regexEmail, inputEmail.value);
+            _validarRegex(regexpf, inputCpf.value);
+            _validarRegex(regexData, inputNascimento.value);
             endereco = {
                 codigo: enderecos.length+1,
                 cep:inputCep.value,
@@ -257,12 +299,12 @@ var info = (() => {
 
         $('#modal-adicionar').modal({backdrop: 'static'});
 
-        inputNome.value = funcionario.nome;
-        inputCpf.value = funcionario.cpf;
-        inputEmail.value = funcionario.email;
-        inputSenha.value = funcionario.senha;
-        inputNascimento.value = funcionario.datanascimento;
-        inputSalario.value = funcionario.salario;
+        inputNomeEditar.value = funcionario.nome;
+        inputCpfEditar.value = funcionario.cpf;
+        inputEmailEditar.value = funcionario.email;
+        inputSenhaEditar.value = funcionario.senha;
+        inputNascimentoEditar.value = funcionario.datanascimento;
+        inputSalarioEditar.value = funcionario.salario;
 
         let endereco = undefined;
 
@@ -276,38 +318,46 @@ var info = (() => {
         
         enderecos.map(e => {
             if(e.codigo == funcionario.codigo){
-                inputBairro.value = e.bairro;
-                inputCep.value = e.cep;
-                inputCidade.value = e.cidade;
-                inputEstado.value = e.estado;
-                inputNumero.value = e.numero;
-                inputRua.value = e.rua;
+                inputBairroEditar.value = e.bairro;
+                inputCepEditar.value = e.cep;
+                inputCidadeEditar.value = e.cidade;
+                inputEstadoEditar.value = e.estado;
+                inputNumeroEditar.value = e.numero;
+                inputRuaEditar.value = e.rua;
                 endereco = e.codigo;
             }
         });
 
 
-        btnSalvar.addEventListener('click', e => {
+        btnSalvarEdicao.addEventListener('click', e => {
             e.preventDefault();
-
+            if (!inputCep.value || !inputRua.value || !inputBairro.value || !inputNumero.value || !inputCidade.value || !inputEstado.value
+                || !inputNome.value || !inputCpf.value || !inputEmail.value || !inputSenha.value || !inputNascimento.value || !inputSalario.value) {
+                swal("Campo vazio!", "Preencha todos os campos por favor!", "warning");
+                    
+                return;
+            }
+            _validarRegex(regexEmail, inputEmail.value);
+            _validarRegex(regexpf, inputCpf.value);
+            _validarRegex(regexData, inputNascimento.value);
             let enderecoAtualizado = {
                 codigo: endereco,
-                cep:inputCep.value,
-                rua:inputRua.value,
-                bairro:inputBairro.value,
-                numero:inputNumero.value,
-                cidade:inputCidade.value,
-                estado:inputEstado.value
+                cep:inputCepEditar.value,
+                rua:inputRuaEditar.value,
+                bairro:inputBairroEditar.value,
+                numero:inputNumeroEditar.value,
+                cidade:inputCidadeEditar.value,
+                estado:inputEstadoEditar.value
             }
 
             let funcionarioAtualizado = {
                 codigo: funcionario.codigo,
-                nome: inputNome.value,
-                cpf: inputCpf.value,
-                email: inputEmail.value,
-                senha: inputSenha.value,
-                datanascimento: inputNascimento.value,
-                salario: inputSalario.value,
+                nome: inputNomeEditar.value,
+                cpf: inputCpfEditar.value,
+                email: inputEmailEditar.value,
+                senha: inputSenhaEditar.value,
+                datanascimento: inputNascimentoEditar.value,
+                salario: inputSalarioEditar.value,
                 endereco: endereco
             }
 

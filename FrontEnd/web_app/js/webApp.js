@@ -37,6 +37,8 @@ let info = (() => {
     let btnSalvarEdicao = document.querySelector('#salvar-edicao');
     let btnCancelarEdicao = document.querySelector('#cancelar-edicao');
 
+    let btnConfirmar = document.querySelector('#confirmar');
+    let btnCancelarExclusao = document.querySelector('#cancelar');
 
     let tabelaFuncionario = document.querySelector('.funcionario');
     let tabelaUsuario = document.querySelector('.usuario');
@@ -45,10 +47,11 @@ let info = (() => {
 
     let regexEmail = /[A-Za-z0-9._-]+@[A-Za-z0-9._-]+.[A-Za-z]/gi;
     let regexpf = /[0-9]{11}/gi;
+    let regexData = /[0-9]{4}[-]{1}[0-90-9]{2}[-]{1}[0-90-9]{2}/g;
 
     function _validarRegex(regex, campo){
         if(!regex.test(campo)){
-            alert('campo inválido!!');
+            swal("Campo vazio!", "Preencha todos os campos por favor!", "warning");
             return;
         }
     }
@@ -61,39 +64,66 @@ let info = (() => {
         fetch(url)
             .then(response => response.json())
             .then(response => _popularTabelaUsuario(response))
-            .catch(err => console.log(err));
+            .catch(err => swal("ERROR", "Erro interno no servidor, se possivel verifique as informações passadas", "error"));
     }
 
     _mostrarTodosAsPessoas();
 
     //GET de uma pessoa apenas pelo codigo
     function apagarUsuario(codigo) {
-        fetch(`http://localhost:9090/usuario/${codigo}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
+        
+
+        $('#modal-exclusao').modal({backdrop: 'static'})
+
+        btnConfirmar.addEventListener('click', e => {
+            e.preventDefault();
+            fetch(`http://localhost:9090/usuario/${codigo}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             }
-        }
-
-        )
-            .then(response => console.log(response))
-            .then(response => _mostrarTodosAsPessoas())
-            .catch(err => console.log(err));
-
+    
+            )
+        
+        .then(response =>  swal("Usuário excluido com sucesso!", "", "sucess"))
+            .then(response => {    
+                _mostrarTodosAsPessoas();
+                $('#modal-confimar').modal({ display: 'none'});
+            })
+            .catch(err => swal("ERROR", "Erro interno no servidor, se possivel verifique as informações passadas", "error"));
+        })
     }
 
     function apagarFuncionario(codigo) {
-        fetch(`http://localhost:9090/funcionario/${codigo}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
 
-        )
-            .then(response => console.log(response))
-            .then(response => _pegarTodosOsfuncionarios())
-            .catch(err => console.log(err));
+        $('#modal-exclusao').modal({backdrop: 'static'})
+
+        btnConfirmar.addEventListener('click', e => {
+            e.preventDefault();
+            fetch(`http://localhost:9090/funcionario/${codigo}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+    
+            )
+                .then(response => swal("Funcionário excluido com sucesso!", " ", "sucess"))
+                .then(response => {
+                    _pegarTodosOsfuncionarios()
+                    $('#modal-confimar').modal({ display: 'none' });
+                })
+                .catch(err => swal("ERROR", "Erro interno no servidor, se possivel verifique as informações passadas", "error"));
+        })
+
+        btnCancelarExclusao.addEventListener('click', e => {
+            e.preventDefault();
+            return;
+        })
+
+
+
 
     }
 
@@ -115,10 +145,10 @@ let info = (() => {
                         listaBackupEnderecos = response;
                         _popularTabelaFuncionario(listaBackupFuncionarios, listaBackupEnderecos);
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => swal("ERROR", "Erro interno no servidor, se possivel verifique as informações passadas", "error"));
 
             })
-            .catch(err => console.log(err));
+            .catch(err => swal("ERROR", "Erro interno no servidor, se possivel verifique as informações passadas", "error"));
     }
 
     _pegarTodosOsfuncionarios();
@@ -137,7 +167,7 @@ let info = (() => {
                 inputCpfEditar.value = response.cpf;
                 inputEmailEditar.value = response.email;
                 inputSenhaEditar.value = response.senha;
-                inputNascimentoEditar.value = response.datanascimento;
+                inputNascimentoEditar.value = response.datanascimento.join('-');
                 inputSalarioEditar.value = response.salario;
 
                 fetch(`http://localhost:9090/endereco/${response.endereco}`)
@@ -154,8 +184,14 @@ let info = (() => {
 
                         btnSalvarEdicao.addEventListener('click', e => {
                             e.preventDefault();
+                            if (!inputCep.value || !inputRua.value || !inputBairro.value || !inputNumero.value || !inputCidade.value || !inputEstado.value
+                                || !inputNome.value || !inputCpf.value || !inputEmail.value || !inputSenha.value || !inputNascimento.value || !inputSalario.value) {
+                                    swal("Campo vazio!", "Preencha todos os campos por favor!", "warning");
+                                return;
+                            }
                             _validarRegex(regexEmail, inputEmail.value);
                             _validarRegex(regexpf, inputCpf.value);
+                            _validarRegex(regexData, inputNascimento.value);
                             let enderecoAtualizado = {
                                 
                                 cep: inputCep.value,
@@ -194,16 +230,16 @@ let info = (() => {
                                         .then(response => response.json())
                                         .then(response => {
                                             _pegarTodosOsfuncionarios();
-                                            return;
+                                            
                                         })
-                                        .catch(err => console.log(err))
+                                        .catch(err => swal("ERROR", "Erro interno no servidor, se possivel verifique as informações passadas", "error"));
                                 })
-                                .catch(err => console.log(err))
+                                .catch(err => swal("ERROR", "Erro interno no servidor, se possivel verifique as informações passadas", "error"));
 
                         })
 
 
-                    }).catch(err => console.log(err))
+                    }).catch(err => swal("ERROR", "Erro interno no servidor, se possivel verifique as informações passadas", "error"))
 
             })
     }
@@ -218,15 +254,16 @@ let info = (() => {
         btnSalvar.addEventListener('click', e => {
             e.preventDefault();
 
-            for (let input of todasInputs) {
-                if (!input.value) {
-                    alert('Por favor preencha todos os campos');
+                if (!inputCep.value || !inputRua.value || !inputBairro.value || !inputNumero.value || !inputCidade.value || !inputEstado.value
+                    || !inputNome.value || !inputCpf.value || !inputEmail.value || !inputSenha.value || !inputNascimento.value || !inputSalario.value) {
+                    swal("Campo vazio!", "Preencha todos os campos por favor!", "warning");
+                        
                     return;
                 }
-            }
+            
             _validarRegex(regexEmail, inputEmail.value);
             _validarRegex(regexpf, inputCpf.value);
-
+            _validarRegex(regexData, inputNascimento.value);
             let endereco = {
                 cep: inputCep.value,
                 rua: inputRua.value,
@@ -246,7 +283,7 @@ let info = (() => {
             })
                 .then(response => response.json())
                 .then(res => {
-
+                    
                     let funcionario = {
                         nome: inputNome.value,
                         cpf: inputCpf.value,
@@ -268,10 +305,12 @@ let info = (() => {
                             response.json();
                         })
                         .then(response => {
-                            console.log(response);
+                            swal("Funcionário criado com sucesso", "", "sucess");
                             _pegarTodosOsfuncionarios();
+                            $('#modal-adicionar').modal({ display: 'none' });
+
                         })
-                        .catch(err => console.log(err));
+                        .catch(err => swal("ERROR", "Erro interno no servidor, se possivel verifique as informações passadas", "error"));
 
                 })
         })
@@ -346,7 +385,7 @@ let info = (() => {
             tdCpf.textContent = f.cpf;
             tdEmail.textContent = f.email;
             tdSenha.textContent = f.senha;
-            tdNascimento.textContent = f.datanascimento;
+            tdNascimento.textContent = f.datanascimento.join('-');
             tdEndereco.textContent = _pegarEndereco(listaBackupEnderecos, f.endereco);
             tdSalario.textContent = f.salario;
             tdAcoes.innerHTML = `
@@ -377,6 +416,7 @@ let info = (() => {
 
     }
 
+
     btnAdicionar.addEventListener('click', e => {
         e.preventDefault();
         _adicionarFuncionario();
@@ -387,5 +427,5 @@ let info = (() => {
         editarFuncionario,
         apagarFuncionario
     }
-    
+
 })()
