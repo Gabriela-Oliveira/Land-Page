@@ -67,21 +67,7 @@ var info = (() => {
 
     _popularTabelaFuncionario(funcionarios);
 
-    btnFuncionario.addEventListener('click', e => {
-        e.preventDefault();
-
-        tabelaUsuario.classList.add('hidden');
-        tabelaFuncionario.classList.remove('hidden');
-        _popularTabelaFuncionario(funcionarios);
-
-    });
-    btnUsuario.addEventListener('click', e => {
-        e.preventDefault();
-
-        tabelaFuncionario.classList.add('hidden');
-        tabelaUsuario.classList.remove('hidden');
-        _popularTabelaUsuario(users);
-    });
+    _popularTabelaUsuario(users);
 
     function _popularTabelaUsuario(users){
         let tabelaUsuarios = document.querySelector('.tableUsuario')
