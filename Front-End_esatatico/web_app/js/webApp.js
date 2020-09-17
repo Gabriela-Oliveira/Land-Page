@@ -40,25 +40,32 @@ let info = (() => {
     let btnSalvar = document.querySelector('#save');
     let btnCancelar = document.querySelector('#cancel');
 
-    let users = [{ 
-        codigo: 1, 
-        nome:'Guilherme Henrique', 
-        whatsapp: '21985430032'}, 
-        { codigo: 2, 
-        nome: 'Gabriela Oliveira', 
-        whatsapp: '21907658890'}, 
-        { codigo: 3, 
-        nome: 'Cicero Romão', 
-        whatsapp: '21978427610'},
-        { codigo: 4, 
-        nome: 'Paulo Eduardo', 
-        whatsapp: '21965324422'
-        }];
+    let users = [{
+            codigo: 1,
+            nome: 'Guilherme Henrique',
+            whatsapp: '21985430032'
+        },
+        {
+            codigo: 2,
+            nome: 'Gabriela Oliveira',
+            whatsapp: '21907658890'
+        },
+        {
+            codigo: 3,
+            nome: 'Cicero Romão',
+            whatsapp: '21978427610'
+        },
+        {
+            codigo: 4,
+            nome: 'Paulo Eduardo',
+            whatsapp: '21965324422'
+        }
+    ];
 
-        let user = {};
+    let user = {};
 
-    let funcionarios = [
-        {codigo: 1,
+    let funcionarios = [{
+        codigo: 1,
         nome: "Iago Murilo Joaquim da Cruz",
         cpf: "32842391543",
         email: "iagomurilojoaquimdacruz-82@msn.com",
@@ -71,23 +78,23 @@ let info = (() => {
     let funcionario = {};
 
     let enderecos = [{
-        codigo:1,
-        cep:"54268454",
-        rua:"Rua das Bananeiras",
-        bairro:"Palmeiras",
-        numero:25,
-        cidade:"São Paulo",
-        estado:"São Paulo"
+        codigo: 1,
+        cep: "54268454",
+        rua: "Rua das Bananeiras",
+        bairro: "Palmeiras",
+        numero: 25,
+        cidade: "São Paulo",
+        estado: "São Paulo"
     }];
-     let endereco = {};
+    let endereco = {};
 
 
     let regexEmail = /[A-Za-z0-9._-]+@[A-Za-z0-9._-]+.[A-Za-z]/gi;
     let regexpf = /[0-9]{11}/gi;
     let regexData = /[0-9]{4}[-]{1}[0-90-9]{2}[-]{1}[0-90-9]{2}/g;
 
-    function _validarRegex(regex, campo){
-        if(!regex.test(campo)){
+    function _validarRegex(regex, campo) {
+        if (!regex.test(campo)) {
             swal("Os campos valores não reconhecidos pelo sistema", "Clique no botão para fechar está janela", "warning");
             return;
         }
@@ -98,7 +105,7 @@ let info = (() => {
 
     _popularTabelaUsuario(users);
 
-    function _popularTabelaUsuario(users){
+    function _popularTabelaUsuario(users) {
         let tabelaUsuarios = document.querySelector('.tableUsuario')
         //Limpa a tabela para não repetir os dados
 
@@ -128,13 +135,13 @@ let info = (() => {
             tr.appendChild(tdNome);
             tr.appendChild(tdWhatsapp);
             tr.appendChild(tdAcoes);
-            
+
             tabelaUsuarios.appendChild(tr);
         });
 
     }
 
-    function _popularTabelaFuncionario(listaFuncionarios){
+    function _popularTabelaFuncionario(listaFuncionarios) {
         let tabelaFuncionarios = document.querySelector('.tableFuncionario')
         // Aqui eu limpo a tabela inteira \o/
         tabelaFuncionarios.textContent = "";
@@ -161,9 +168,9 @@ let info = (() => {
             tdSenha.textContent = u.senha;
             tdNascimento.textContent = u.datanascimento;
             tdEndereco.textContent = enderecos.map(e => {
-                if(e.codigo == u.codigo){
+                if (e.codigo == u.codigo) {
                     return e.cep;
-                }    
+                }
             });
             tdSalario.textContent = u.salario;
             tdAcoes.innerHTML = `
@@ -187,7 +194,7 @@ let info = (() => {
             tr.appendChild(tdEndereco);
             tr.appendChild(tdSalario);
             tr.appendChild(tdAcoes);
-         
+
             tabelaFuncionarios.appendChild(tr);
         });
 
@@ -196,86 +203,92 @@ let info = (() => {
 
     //GET de uma pessoa apenas pelo codigo
 
-    function _pegarPorCodigoUsuario(codigo){
-        for(let user1 of users){
-            if(user1.codigo == codigo){
+    function _pegarPorCodigoUsuario(codigo) {
+        for (let user1 of users) {
+            if (user1.codigo == codigo) {
                 user = user1;
                 return user;
             }
         }
     }
 
-    function apagarFuncionario(codigo){
+    function apagarFuncionario(codigo) {
 
 
-        $('#modal-exclusao').modal({backdrop: 'static'})
+        $('#modal-exclusao').modal({
+            backdrop: 'static'
+        })
 
         btnConfirmar.addEventListener('click', e => {
             e.preventDefault();
             let funcionario = _pegarPorCodigoFuncionario(codigo);
             let index = funcionarios.indexOf(funcionario);
-            if(index > -1){
+            if (index > -1) {
                 funcionarios.splice(index, 1);
                 swal("Concluido", "Funcionário apagado com sucesso", "success");
             }
             _popularTabelaFuncionario(funcionarios);
-            })
+        })
     }
 
-    function apagarUsuario(codigo){
+    function apagarUsuario(codigo) {
 
-        $('#modal-exclusao').modal({backdrop: 'static'})
+        $('#modal-exclusao').modal({
+            backdrop: 'static'
+        })
 
         btnConfirmar.addEventListener('click', e => {
-            e.preventDefault();            
+            e.preventDefault();
             let usuario = _pegarPorCodigoUsuario(codigo);
             let index = users.indexOf(usuario);
-            if(index > -1){
+            if (index > -1) {
                 users.splice(index, 1);
                 swal("Concluido", "Usuário apagado com sucesso", "success");
             }
             _popularTabelaUsuario(users);
-            });
-            
+        });
+
     }
     //GET de um e apenas um funcionario pelo codigo
-    function _pegarPorCodigoFuncionario(codigo){
-        for(let funcionario1 of funcionarios){
-            if(funcionario1.codigo == codigo){
+    function _pegarPorCodigoFuncionario(codigo) {
+        for (let funcionario1 of funcionarios) {
+            if (funcionario1.codigo == codigo) {
                 funcionario = funcionario1
                 return funcionario;
             }
         }
     }
 
-    function _adicionarFuncionario(){
+    function _adicionarFuncionario() {
 
-        $('#modal-adicionar').modal({backdrop: 'static'});
+        $('#modal-adicionar').modal({
+            backdrop: 'static'
+        });
 
         btnSalvar.addEventListener('click', e => {
             e.preventDefault();
 
-            if (!inputCep.value || !inputRua.value || !inputBairro.value || !inputNumero.value || !inputCidade.value || !inputEstado.value
-                || !inputNome.value || !inputCpf.value || !inputEmail.value || !inputSenha.value || !inputNascimento.value || !inputSalario.value) {
+            if (!inputCep.value || !inputRua.value || !inputBairro.value || !inputNumero.value || !inputCidade.value || !inputEstado.value ||
+                !inputNome.value || !inputCpf.value || !inputEmail.value || !inputSenha.value || !inputNascimento.value || !inputSalario.value) {
                 swal("Campo vazio!", "Preencha todos os campos por favor!", "warning");
-                    
+
                 return;
             }
             _validarRegex(regexEmail, inputEmail.value);
             _validarRegex(regexpf, inputCpf.value);
             _validarRegex(regexData, inputNascimento.value);
             endereco = {
-                codigo: enderecos.length+1,
-                cep:inputCep.value,
-                rua:inputRua.value,
-                bairro:inputBairro.value,
-                numero:inputNumero.value,
-                cidade:inputCidade.value,
-                estado:inputEstado.value
+                codigo: enderecos.length + 1,
+                cep: inputCep.value,
+                rua: inputRua.value,
+                bairro: inputBairro.value,
+                numero: inputNumero.value,
+                cidade: inputCidade.value,
+                estado: inputEstado.value
             }
 
             funcionario = {
-                codigo: funcionarios.length+1,
+                codigo: funcionarios.length + 1,
                 nome: inputNome.value,
                 cpf: inputCpf.value,
                 email: inputEmail.value,
@@ -293,12 +306,15 @@ let info = (() => {
         })
 
     }
-    function editarFuncionario(codigo){
+
+    function editarFuncionario(codigo) {
         let funcionario = _pegarPorCodigoFuncionario(codigo);
         let index = funcionarios.indexOf(funcionario);
-        if(index == -1) return;
+        if (index == -1) return;
 
-        $('#modal-adicionar').modal({backdrop: 'static'});
+        $('#modal-adicionar').modal({
+            backdrop: 'static'
+        });
 
         inputNomeEditar.value = funcionario.nome;
         inputCpfEditar.value = funcionario.cpf;
@@ -309,16 +325,16 @@ let info = (() => {
 
         let endereco = undefined;
 
-        let end = enderecos.map(ende => {
-            if(ende.codigo == funcionario.codigo){
+        let end = enderecos.forEach(ende => {
+            if (ende.codigo == funcionario.codigo) {
                 return ende;
             }
         })
 
         let indexEndereco = enderecos.indexOf(end);
-        
+
         enderecos.map(e => {
-            if(e.codigo == funcionario.codigo){
+            if (e.codigo == funcionario.codigo) {
                 inputBairroEditar.value = e.bairro;
                 inputCepEditar.value = e.cep;
                 inputCidadeEditar.value = e.cidade;
@@ -332,10 +348,10 @@ let info = (() => {
 
         btnSalvarEdicao.addEventListener('click', e => {
             e.preventDefault();
-            if (!inputCep.value || !inputRua.value || !inputBairro.value || !inputNumero.value || !inputCidade.value || !inputEstado.value
-                || !inputNome.value || !inputCpf.value || !inputEmail.value || !inputSenha.value || !inputNascimento.value || !inputSalario.value) {
+            if (!inputCep.value || !inputRua.value || !inputBairro.value || !inputNumero.value || !inputCidade.value || !inputEstado.value ||
+                !inputNome.value || !inputCpf.value || !inputEmail.value || !inputSenha.value || !inputNascimento.value || !inputSalario.value) {
                 swal("Campo vazio!", "Preencha todos os campos por favor!", "warning");
-                    
+
                 return;
             }
             _validarRegex(regexEmail, inputEmail.value);
@@ -343,12 +359,12 @@ let info = (() => {
             _validarRegex(regexData, inputNascimento.value);
             let enderecoAtualizado = {
                 codigo: endereco,
-                cep:inputCepEditar.value,
-                rua:inputRuaEditar.value,
-                bairro:inputBairroEditar.value,
-                numero:inputNumeroEditar.value,
-                cidade:inputCidadeEditar.value,
-                estado:inputEstadoEditar.value
+                cep: inputCepEditar.value,
+                rua: inputRuaEditar.value,
+                bairro: inputBairroEditar.value,
+                numero: inputNumeroEditar.value,
+                cidade: inputCidadeEditar.value,
+                estado: inputEstadoEditar.value
             }
 
             let funcionarioAtualizado = {
@@ -377,7 +393,7 @@ let info = (() => {
         _popularTabelaFuncionario(funcionarios);
     })
 
-    return{
+    return {
         apagarFuncionario,
         editarFuncionario,
         apagarUsuario
