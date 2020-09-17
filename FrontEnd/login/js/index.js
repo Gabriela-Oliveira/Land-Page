@@ -24,7 +24,14 @@
 
     function _procurarFuncionario(){
         _validarEmailSenha();
-        let listaFuncionarios =  [];
+        let listaFuncionarios =  [ {codigo: 0,
+            nome: "Iago Murilo Joaquim da Cruz",
+            cpf: "32842391543",
+            email: "adm@adm.com",
+            senha: "123456",
+            datanascimento: "1956-06-10",
+            salario: 6000.0,
+            endereco: 1}];
         fetch('http://localhost:9090/funcionario')
         .then(response => response.json())
         .then(response => {
@@ -32,13 +39,13 @@
 
             for(funcionario of listaFuncionarios){
                 if(funcionario.email == inputEmail.value && funcionario.senha == inputSenha.value.toString()){
-                    alert('Tudo certo aqui cara só vai');
+                    window.location.href = '../web_app/index.html';
                 }
 
     
             }
         })
-        .catch(err => console.log(err));
+        .catch(err => mostrarMensagem('Erro interno no servidor! se possível verifique as informações passadas!'));
     }
 
     function mostrarMensagem(mensage, color){

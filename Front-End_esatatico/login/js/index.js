@@ -14,7 +14,16 @@
     senha: "123456",
     datanascimento: "1956-06-10",
     salario: 6000.0,
-    endereco: 1}];
+    endereco: 1},
+    {codigo: 2,
+        nome: "Iago Murilo Joaquim da Cruz",
+        cpf: "32842391543",
+        email: "adm@adm.com",
+        senha: "123456",
+        datanascimento: "1956-06-10",
+        salario: 6000.0,
+        endereco: 1}
+];
     //Validadndo e-mail e senha:
     function _validarEmailSenha(){
         let regexEmail = /^[a-z0-9.#-_]+@[a-z]+.[a-z]/i;
@@ -37,10 +46,8 @@
             for(funcionario of funcionarios){
                 if(funcionario.email == inputEmail.value && funcionario.senha == inputSenha.value.toString()){
                     mostrarMensagem("Login efetuado com sucesso!", 'green');
-                    window.location.href = '../../../Front-End_esatatico/web_app/index.html';
+                    window.location.href = '../views/web-app.html';
                 }
-
-    
             }
     }
 

@@ -216,7 +216,7 @@ let info = (() => {
             let index = funcionarios.indexOf(funcionario);
             if(index > -1){
                 funcionarios.splice(index, 1);
-                alert('deu certo');
+                swal("Concluido", "Funcionário apagado com sucesso", "success");
             }
             _popularTabelaFuncionario(funcionarios);
             })
@@ -232,8 +232,9 @@ let info = (() => {
             let index = users.indexOf(usuario);
             if(index > -1){
                 users.splice(index, 1);
-            _popularTabelaUsuario(users);
+                swal("Concluido", "Usuário apagado com sucesso", "success");
             }
+            _popularTabelaUsuario(users);
             });
             
     }
